@@ -3,7 +3,6 @@ import requests
 import re
 import datetime
 
-
 def getIP():
     # 获取公网IP
     year = str(datetime.datetime.now().year)
@@ -12,19 +11,16 @@ def getIP():
     ip = re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", data.text).group(0)
     return ip
 
-
 def getMemory():
     # 获取内存百分比
     m = psutil.virtual_memory().percent
     return str(m)
-
 
 def getCPU(x):
     # 获取CPU百分比
     # time.sleep(0.1)
     c = psutil.cpu_percent(interval=x)
     return str(c)
-
 
 def sendServer(desp):
     # 发送到微信
@@ -36,7 +32,6 @@ def sendServer(desp):
          }
     r = requests.post(url, data=d)
     return r.text
-
 
 var = 1
 while var == 1:
