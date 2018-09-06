@@ -6,7 +6,7 @@ import datetime
 def getIP():
     # 获取公网IP
     year = str(datetime.datetime.now().year)
-    url = "http://" + year + ".ip138.com/ic.asp"
+    url = "http://%s.ip138.com/ic.asp" %year
     data = requests.get(url)
     ip = re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", data.text).group(0)
     return ip
@@ -25,10 +25,10 @@ def getCPU(x):
 def sendServer(desp):
     # 发送到微信
     today = str(datetime.date.today())
-    key = "key"
-    url = "https://sc.ftqq.com/" + key + ".send"
-    d = {'text': "日期：" + today + '，内存CPU当前百分比',
-         'desp': desp
+    key = "SCU23702T0f1f4368d47f6323a502baa77b3dfb5d5ab65b0f15913" #key
+    url = "https://sc.ftqq.com/%s.send" %key
+    d = {'text': "日期："+ today +"，内存CPU当前百分比", 
+         'desp': desp 
          }
     r = requests.post(url, data=d)
     return r.text
@@ -39,5 +39,5 @@ while var == 1:
     ip = getIP()
     x = getCPU(1)
     y = getMemory()
-    send = "###公网IP：" + ip + "，CPU：" + x + "，内存：" + y
+    send = "###公网IP：%s，CPU：%s，内存：%s" %(ip,x,y)
     sendServer(send)
